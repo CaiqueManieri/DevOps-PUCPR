@@ -1,0 +1,11 @@
+name: Continuous Integration - React
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v5
+      
+      - name: OpenCommit — improve commits with AI 🧙
+        uses: di-sukharev/opencommit@github-action-v1.0.2
