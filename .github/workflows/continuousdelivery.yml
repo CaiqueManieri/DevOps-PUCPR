@@ -1,0 +1,35 @@
+name: Continuous Delivery - React
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Build de produção (Vite)
+        run: npm run build
+
+      - name: Upload do artefato (múltiplos caminhos e exclusões)
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-dist-e-manifest
+          path: |
+            dist/**
+            package.json
+            package-lock.json
+            !dist/**/*.map
+          if-no-files-found: error
