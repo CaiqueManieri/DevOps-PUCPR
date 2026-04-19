@@ -1,13 +1,11 @@
-name: Continuous Integration - React
+name: Continuous Delivery - React
 
 on:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
 
 jobs:
-  build:
+  deliver:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositório
@@ -22,8 +20,16 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Executar ESLint
-        run: npm run lint
-
       - name: Build de produção (Vite)
         run: npm run build
+
+      - name: Upload do artefato (múltiplos caminhos e exclusões)
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-dist-e-manifest
+          path: |
+            dist/**
+            package.json
+            package-lock.json
+            !dist/**/*.map
+          if-no-files-found: error
