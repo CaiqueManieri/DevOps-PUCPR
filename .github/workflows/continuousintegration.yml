@@ -2,9 +2,9 @@ name: Continuous Integration - React
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, desenvolvimento]
   pull_request:
-    branches: [main, master]
+    branches: [main, master, desenvolvimento]
 
 jobs:
   build:
