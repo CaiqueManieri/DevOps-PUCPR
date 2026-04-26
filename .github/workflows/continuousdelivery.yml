@@ -2,7 +2,7 @@ name: Continuous Delivery - React
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, desenvolvimento]
 
 jobs:
   deliver:
