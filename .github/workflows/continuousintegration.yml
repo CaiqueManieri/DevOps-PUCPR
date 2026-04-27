@@ -25,6 +25,10 @@ jobs:
       - name: Executar ESLint
         run: npm run lint
 
+      - name: Executar testes unitarios (PR)
+        if: github.event_name == 'pull_request'
+        run: npm run test:unit
+
       - name: Build de produção (Vite)
         run: npm run build
 
